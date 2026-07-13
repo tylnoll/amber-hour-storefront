@@ -63,3 +63,28 @@ npm run build
 ## Deploy
 
 Deploy to Vercel and set the same environment variables in project settings.
+
+## Deploy To GitHub Pages (Static Site)
+
+This repo now includes a workflow at `.github/workflows/deploy-pages.yml` that deploys a static export to GitHub Pages.
+
+### One-time GitHub setup
+
+1. Push this project to a GitHub repository.
+2. In GitHub: **Settings -> Pages**.
+3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+
+### Deploy
+
+- Push to `main`.
+- GitHub Actions will build and deploy automatically.
+- Your site URL will appear in the completed workflow run.
+
+### Important limitations on GitHub Pages
+
+GitHub Pages is static hosting, so server features are not available there:
+
+- `src/app/api/**` route handlers are removed during the Pages build.
+- Stripe checkout, admin APIs, newsletter submit, and contact API do not work on Pages.
+
+For full functionality (admin + Stripe + APIs), deploy to a server-capable platform like Vercel.

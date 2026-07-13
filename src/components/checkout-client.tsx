@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useCart } from "@/components/cart-context";
 
-export function CheckoutClient({ status }: { status: string | null }) {
+export function CheckoutClient() {
+  const searchParams = useSearchParams();
+  const status = searchParams.get("status");
   const { lines } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
