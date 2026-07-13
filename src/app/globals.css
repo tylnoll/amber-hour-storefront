@@ -1,0 +1,155 @@
+@config "../../tailwind.config.ts";
+@import "tailwindcss";
+
+:root {
+  --dusk-top: #f2c879;
+  --dusk-mid: #c97b4a;
+  --dusk-deep: #4a2a45;
+  --night: #221a2e;
+  --night-deep: #16111f;
+  --cream: #fbf1e1;
+  --cream-dim: #e9dcc4;
+  --ember: #c4562e;
+  --gold: #e8a54b;
+  --sage: #93a583;
+  --line: rgba(251, 241, 225, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  color: var(--cream);
+}
+
+body {
+  font-family: var(--font-manrope), sans-serif;
+  background: transparent;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-fraunces), serif;
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.eyebrow {
+  font-family: var(--font-space-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+  font-size: 0.72rem;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--ember);
+  color: var(--cream);
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: #d9663a;
+  box-shadow: 0 10px 24px rgba(196, 86, 46, 0.35);
+}
+
+.btn-ghost {
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  color: var(--cream);
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--cream);
+  background: rgba(251, 241, 225, 0.06);
+}
+
+::selection {
+  background: var(--ember);
+  color: var(--cream);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dripFall {
+  0% {
+    transform: translateY(0) scaleY(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(40px) scaleY(1.3);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(70px) scaleY(0.6);
+    opacity: 0;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scaleY(1) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: scaleY(1.08) rotate(-2deg);
+    opacity: 0.96;
+  }
+  50% {
+    transform: scaleY(0.94) rotate(1.5deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scaleY(1.05) rotate(-1deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes driftGlow {
+  0%,
+  100% {
+    transform: translateX(-54%) translateY(0);
+  }
+  50% {
+    transform: translateX(-46%) translateY(30px);
+  }
+}
