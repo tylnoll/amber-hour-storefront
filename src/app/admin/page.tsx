@@ -592,12 +592,13 @@ export default function AdminPage() {
       <section className="px-[5vw] py-16">
         <div className="mx-auto w-[min(540px,100%)] rounded-2xl border border-[var(--line)] p-6">
           <p className="eyebrow">Admin</p>
-          <h1 className="mt-2 text-5xl">Employee login</h1>
+          <h1 className="mt-2 text-5xl">Administrator login</h1>
           <form className="mt-6 space-y-3" onSubmit={handleLogin}>
             <input
               value={username}
               onChange={(event) => setUsername(event.target.value)}
-              placeholder="Username"
+              placeholder="Admin email"
+              type="email"
               className="focus-ring w-full rounded-xl border border-[var(--line)] bg-transparent px-4 py-3"
               required
             />
@@ -635,7 +636,7 @@ export default function AdminPage() {
                   Account: <strong>{state.profile.displayName}</strong>
                 </p>
                 <p>
-                  Username: <strong>{state.profile.username}</strong> · Rank: <strong>{state.profile.rank}</strong>
+                  Email: <strong>{state.profile.username}</strong> · Rank: <strong>{state.profile.rank}</strong>
                 </p>
                 <p className="mt-1">Roles: {state.profile.roles.join(", ")}</p>
               </div>

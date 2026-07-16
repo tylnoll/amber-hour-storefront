@@ -76,8 +76,16 @@ export default function AccountPage() {
     const result = (await response.json()) as {
       ok: boolean;
       dashboard?: CustomerDashboard;
+      requiresConfirmation?: boolean;
       error?: string;
     };
+
+    if (result.requiresConfirmation) {
+      setMode("login");
+      setMessage("Account created. Check your email to confirm it before signing in.");
+      setSubmitting(false);
+      return;
+    }
 
     if (!response.ok || !result.dashboard) {
       setMessage(result.error ?? "Could not create account.");

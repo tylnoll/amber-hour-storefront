@@ -110,8 +110,6 @@ export type CustomerAccountRecord = {
   email: string;
   displayName: string;
   phone: string;
-  passwordHash: string;
-  passwordSalt: string;
   createdAt: string;
   updatedAt: string;
   lastLoginAt?: string;

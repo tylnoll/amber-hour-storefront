@@ -1,7 +1,7 @@
-import crypto from "node:crypto";
-import fs from "node:fs/promises";
-import path from "node:path";
-import { getDataDir } from "@/lib/data-path";
+import { admin, type User } from "@netlify/identity";
+import { and, desc, eq } from "drizzle-orm";
+import { db } from "../../db";
+import { blockedSignups, customerProfiles } from "../../db/schema";
 import {
   AdminAccountDetail,
   CustomerAccountRecord,
@@ -11,42 +11,27 @@ import {
 } from "@/lib/types";
 import { readSyncedStripeOrders } from "@/lib/stripe-server";
 
-type AccountsData = {
-  users: CustomerAccountRecord[];
-  bannedIps: string[];
-  bannedPhones: string[];
-};
-
-const accountsPath = path.join(getDataDir(), "accounts.json");
-
-async function ensureAccountsFile() {
-  try {
-    await fs.access(accountsPath);
-  } catch {
-    const initial: AccountsData = { users: [], bannedIps: [], bannedPhones: [] };
-    await fs.mkdir(path.dirname(accountsPath), { recursive: true });
-    await fs.writeFile(accountsPath, JSON.stringify(initial, null, 2), "utf8");
-  }
-}
-
-async function readAccountsData() {
-  await ensureAccountsFile();
-  const raw = await fs.readFile(accountsPath, "utf8");
-  return JSON.parse(raw) as AccountsData;
-}
-
-async function writeAccountsData(data: AccountsData) {
-  await ensureAccountsFile();
-  await fs.writeFile(accountsPath, JSON.stringify(data, null, 2), "utf8");
-  return data;
-}
-
-function hashPassword(password: string, salt: string) {
-  return crypto.scryptSync(password, salt, 64).toString("hex");
-}
-
 function normalizeEmail(email: string) {
   return email.trim().toLowerCase();
+}
+
+function toRecord(profile: typeof customerProfiles.$inferSelect): CustomerAccountRecord {
+  return {
+    id: profile.id,
+    email: profile.email,
+    displayName: profile.displayName,
+    phone: profile.phone,
+    createdAt: profile.createdAt,
+    updatedAt: profile.updatedAt,
+    lastLoginAt: profile.lastLoginAt ?? undefined,
+    createdIp: profile.createdIp,
+    createdIpSource: profile.createdIpSource ?? undefined,
+    lastIp: profile.lastIp ?? undefined,
+    lastIpSource: profile.lastIpSource ?? undefined,
+    pointsAdjustment: profile.pointsAdjustment,
+    banned: profile.banned,
+    banReason: profile.banReason ?? undefined,
+  };
 }
 
 function toSummary(account: CustomerAccountRecord): CustomerAccountSummary {
@@ -74,19 +59,13 @@ function getOrderPoints(orders: CustomerOrder[]) {
 
   for (const order of orders) {
     if (order.paymentStatus !== "paid") continue;
-
     points += Math.floor(order.amountTotal / 10);
 
-    if (order.amountTotal >= 100) {
-      points += 5;
-    }
+    if (order.amountTotal >= 100) points += 5;
 
     for (const line of order.lineItems) {
       const match = line.description.match(/(\d+(?:\.\d+)?)\s*oz/i);
-      if (match) {
-        const oz = Number(match[1]);
-        if (oz >= 8) points += 2 * (line.quantity || 1);
-      }
+      if (match && Number(match[1]) >= 8) points += 2 * (line.quantity || 1);
     }
   }
 
@@ -94,9 +73,7 @@ function getOrderPoints(orders: CustomerOrder[]) {
 }
 
 function getEffectivePoints(orders: CustomerOrder[], account: CustomerAccountRecord) {
-  const basePoints = getOrderPoints(orders);
-  const adjustment = account.pointsAdjustment ?? 0;
-  return Math.max(0, basePoints + adjustment);
+  return Math.max(0, getOrderPoints(orders) + (account.pointsAdjustment ?? 0));
 }
 
 function hasPaidOrders(orders: CustomerOrder[]) {
@@ -107,7 +84,7 @@ async function getOrdersForEmail(email: string) {
   const normalized = normalizeEmail(email);
   const synced = await readSyncedStripeOrders();
 
-  const orders = synced
+  return synced
     .filter((entry) => normalizeEmail(entry.customerEmail) === normalized)
     .map(
       (entry): CustomerOrder => ({
@@ -120,117 +97,156 @@ async function getOrdersForEmail(email: string) {
         lineItems: entry.lineItems,
       }),
     );
-
-  return orders;
 }
 
-export async function getAccountsSummary() {
-  const data = await readAccountsData();
-  const summaries: CustomerAccountSummary[] = [];
-
-  for (const user of data.users) {
-    const orders = await getOrdersForEmail(user.email);
-    const points = getEffectivePoints(orders, user);
-    summaries.push({ ...toSummary(user), totalOrders: orders.length, points });
-  }
-
-  return {
-    accounts: summaries.sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
-    bannedIps: data.bannedIps,
-    bannedPhones: data.bannedPhones,
-  };
+async function getBlockedValues(kind: "ip" | "phone") {
+  const rows = await db
+    .select({ value: blockedSignups.value })
+    .from(blockedSignups)
+    .where(eq(blockedSignups.kind, kind));
+  return rows.map((row) => row.value);
 }
 
-export async function registerAccount(input: {
+export async function assertSignupAllowed(input: { ip: string; phone: string }) {
+  const ip = input.ip.trim();
+  const phone = input.phone.trim();
+  const [blockedIp] = ip
+    ? await db
+        .select({ value: blockedSignups.value })
+        .from(blockedSignups)
+        .where(and(eq(blockedSignups.kind, "ip"), eq(blockedSignups.value, ip)))
+        .limit(1)
+    : [];
+
+  if (blockedIp) throw new Error("This network is blocked from creating accounts.");
+
+  const [blockedPhone] = phone
+    ? await db
+        .select({ value: blockedSignups.value })
+        .from(blockedSignups)
+        .where(and(eq(blockedSignups.kind, "phone"), eq(blockedSignups.value, phone)))
+        .limit(1)
+    : [];
+
+  if (blockedPhone) throw new Error("This phone number is blocked from creating accounts.");
+}
+
+export async function createAccountProfile(input: {
+  user: User;
   displayName: string;
   email: string;
   phone: string;
-  password: string;
   ip: string;
   ipSource?: string;
 }) {
-  const data = await readAccountsData();
-  const email = normalizeEmail(input.email);
-  const phone = input.phone.trim();
-  const ip = input.ip.trim();
-
-  if (data.bannedIps.includes(ip)) {
-    throw new Error("This network is blocked from creating accounts.");
-  }
-
-  if (phone && data.bannedPhones.includes(phone)) {
-    throw new Error("This phone number is blocked from creating accounts.");
-  }
-
-  if (data.users.some((user) => normalizeEmail(user.email) === email)) {
-    throw new Error("An account with this email already exists.");
-  }
-
-  const salt = crypto.randomBytes(16).toString("hex");
   const now = new Date().toISOString();
+  const [profile] = await db
+    .insert(customerProfiles)
+    .values({
+      id: input.user.id,
+      email: normalizeEmail(input.user.email ?? input.email),
+      displayName: input.displayName.trim(),
+      phone: input.phone.trim(),
+      createdAt: input.user.createdAt ?? now,
+      updatedAt: now,
+      lastLoginAt: input.user.confirmedAt ? now : null,
+      createdIp: input.ip.trim(),
+      createdIpSource: input.ipSource ?? "unknown",
+      lastIp: input.ip.trim(),
+      lastIpSource: input.ipSource ?? "unknown",
+    })
+    .returning();
 
-  const account: CustomerAccountRecord = {
-    id: `acct_${crypto.randomUUID().replace(/-/g, "")}`,
-    email,
-    displayName: input.displayName.trim(),
-    phone,
-    passwordHash: hashPassword(input.password, salt),
-    passwordSalt: salt,
-    createdAt: now,
-    updatedAt: now,
-    createdIp: ip,
-    createdIpSource: input.ipSource || "unknown",
-    lastIp: ip,
-    lastIpSource: input.ipSource || "unknown",
-    lastLoginAt: now,
-    banned: false,
-  };
-
-  data.users.push(account);
-  await writeAccountsData(data);
-
-  return toSummary(account);
+  return toSummary(toRecord(profile));
 }
 
-export async function loginAccount(input: { email: string; password: string; ip: string; ipSource?: string }) {
-  const data = await readAccountsData();
+export async function prepareAccountLogin(input: { email: string; ip: string }) {
   const email = normalizeEmail(input.email);
-  const account = data.users.find((entry) => normalizeEmail(entry.email) === email);
+  const [profile] = await db.select().from(customerProfiles).where(eq(customerProfiles.email, email)).limit(1);
 
-  if (!account) {
-    throw new Error("Invalid email or password.");
+  if (input.ip.trim()) {
+    const [blockedIp] = await db
+      .select({ value: blockedSignups.value })
+      .from(blockedSignups)
+      .where(and(eq(blockedSignups.kind, "ip"), eq(blockedSignups.value, input.ip.trim())))
+      .limit(1);
+    if (blockedIp) throw new Error("This network is blocked.");
   }
 
-  if (data.bannedIps.includes(input.ip.trim())) {
-    throw new Error("This network is blocked.");
+  if (profile?.phone) {
+    const [blockedPhone] = await db
+      .select({ value: blockedSignups.value })
+      .from(blockedSignups)
+      .where(and(eq(blockedSignups.kind, "phone"), eq(blockedSignups.value, profile.phone)))
+      .limit(1);
+    if (blockedPhone) throw new Error("This account is blocked.");
   }
 
-  if (account.phone && data.bannedPhones.includes(account.phone)) {
-    throw new Error("This account is blocked.");
-  }
+  if (profile?.banned) throw new Error(profile.banReason || "This account is banned.");
+}
 
-  if (account.banned) {
-    throw new Error(account.banReason || "This account is banned.");
-  }
-
-  const computed = hashPassword(input.password, account.passwordSalt);
-  if (computed !== account.passwordHash) {
-    throw new Error("Invalid email or password.");
-  }
-
+export async function recordAccountLogin(input: {
+  user: User;
+  email: string;
+  ip: string;
+  ipSource?: string;
+}) {
   const now = new Date().toISOString();
-  account.lastLoginAt = now;
-  account.lastIp = input.ip.trim();
-  account.lastIpSource = input.ipSource || account.lastIpSource || "unknown";
-  account.updatedAt = now;
-  await writeAccountsData(data);
+  const email = normalizeEmail(input.user.email ?? input.email);
+  const displayName = input.user.name ?? email.split("@")[0];
+  const phone = typeof input.user.userMetadata?.phone === "string" ? input.user.userMetadata.phone : "";
 
-  return toSummary(account);
+  await db
+    .insert(customerProfiles)
+    .values({
+      id: input.user.id,
+      email,
+      displayName,
+      phone,
+      createdAt: input.user.createdAt ?? now,
+      updatedAt: now,
+      lastLoginAt: now,
+      createdIp: input.ip.trim(),
+      createdIpSource: input.ipSource ?? "unknown",
+      lastIp: input.ip.trim(),
+      lastIpSource: input.ipSource ?? "unknown",
+    })
+    .onConflictDoUpdate({
+      target: customerProfiles.id,
+      set: {
+        email,
+        updatedAt: now,
+        lastLoginAt: now,
+        lastIp: input.ip.trim(),
+        lastIpSource: input.ipSource ?? "unknown",
+      },
+    });
+}
+
+export async function getAccountsSummary() {
+  const profiles = await db.select().from(customerProfiles).orderBy(desc(customerProfiles.createdAt));
+  const summaries: CustomerAccountSummary[] = [];
+
+  for (const profile of profiles) {
+    const account = toRecord(profile);
+    const orders = await getOrdersForEmail(account.email);
+    summaries.push({
+      ...toSummary(account),
+      totalOrders: orders.length,
+      points: getEffectivePoints(orders, account),
+    });
+  }
+
+  return {
+    accounts: summaries,
+    bannedIps: await getBlockedValues("ip"),
+    bannedPhones: await getBlockedValues("phone"),
+  };
 }
 
 export async function getAccountById(accountId: string) {
-  const data = await readAccountsData();
-  return data.users.find((entry) => entry.id === accountId) ?? null;
+  const [profile] = await db.select().from(customerProfiles).where(eq(customerProfiles.id, accountId)).limit(1);
+  return profile ? toRecord(profile) : null;
 }
 
 export async function getDashboardForAccount(accountId: string): Promise<CustomerDashboard | null> {
@@ -252,18 +268,11 @@ export async function getAdminAccountDetail(accountId: string): Promise<AdminAcc
   const account = await getAccountById(accountId);
   if (!account) return null;
 
-  const orders = (await getOrdersForEmail(account.email)).sort(
-    (a, b) => b.createdAt.localeCompare(a.createdAt),
-  );
+  const orders = await getOrdersForEmail(account.email);
   const points = getEffectivePoints(orders, account);
-  const summary: CustomerAccountSummary = {
-    ...toSummary(account),
-    points,
-    totalOrders: orders.length,
-  };
 
   return {
-    account: summary,
+    account: { ...toSummary(account), points, totalOrders: orders.length },
     orders,
     pointsAdjustment: account.pointsAdjustment ?? 0,
     firstOrderOfferEligible: !hasPaidOrders(orders),
@@ -278,62 +287,46 @@ export async function adminUpdateAccount(action:
   | { type: "banAccount"; accountId: string; banned: boolean; reason?: string }
   | { type: "banIp"; ip: string; banned: boolean }
   | { type: "banPhone"; phone: string; banned: boolean }) {
-  const data = await readAccountsData();
+  if (action.type === "banIp" || action.type === "banPhone") {
+    const kind = action.type === "banIp" ? "ip" : "phone";
+    const value = (action.type === "banIp" ? action.ip : action.phone).trim();
+    if (!value) throw new Error(kind === "ip" ? "IP is required." : "Phone number is required.");
 
-  if (action.type === "banIp") {
-    const ip = action.ip.trim();
-    if (!ip) throw new Error("IP is required.");
-    data.bannedIps = action.banned
-      ? Array.from(new Set([...data.bannedIps, ip]))
-      : data.bannedIps.filter((entry) => entry !== ip);
-    await writeAccountsData(data);
+    if (action.banned) {
+      await db
+        .insert(blockedSignups)
+        .values({ kind, value, createdAt: new Date().toISOString() })
+        .onConflictDoNothing();
+    } else {
+      await db
+        .delete(blockedSignups)
+        .where(and(eq(blockedSignups.kind, kind), eq(blockedSignups.value, value)));
+    }
     return;
   }
 
-  if (action.type === "banPhone") {
-    const phone = action.phone.trim();
-    if (!phone) throw new Error("Phone number is required.");
-    data.bannedPhones = action.banned
-      ? Array.from(new Set([...data.bannedPhones, phone]))
-      : data.bannedPhones.filter((entry) => entry !== phone);
-    await writeAccountsData(data);
-    return;
-  }
-
-  const target = data.users.find((entry) => entry.id === action.accountId);
-  if (!target) throw new Error("Account not found.");
+  const account = await getAccountById(action.accountId);
+  if (!account) throw new Error("Account not found.");
 
   if (action.type === "deleteAccount") {
-    data.users = data.users.filter((entry) => entry.id !== action.accountId);
-    await writeAccountsData(data);
+    await admin.deleteUser(action.accountId);
+    await db.delete(customerProfiles).where(eq(customerProfiles.id, action.accountId));
     return;
   }
 
   if (action.type === "resetPassword") {
-    if (action.newPassword.length < 8) {
-      throw new Error("New password must be at least 8 characters.");
-    }
-    const salt = crypto.randomBytes(16).toString("hex");
-    target.passwordSalt = salt;
-    target.passwordHash = hashPassword(action.newPassword, salt);
-    target.updatedAt = new Date().toISOString();
-    await writeAccountsData(data);
+    if (action.newPassword.length < 8) throw new Error("New password must be at least 8 characters.");
+    await admin.updateUser(action.accountId, { password: action.newPassword });
     return;
   }
 
+  const updatedAt = new Date().toISOString();
+
   if (action.type === "changeEmail") {
-    const nextEmail = normalizeEmail(action.newEmail);
-    if (!nextEmail) throw new Error("New email is required.");
-    if (
-      data.users.some(
-        (entry) => entry.id !== action.accountId && normalizeEmail(entry.email) === nextEmail,
-      )
-    ) {
-      throw new Error("Another account already uses this email.");
-    }
-    target.email = nextEmail;
-    target.updatedAt = new Date().toISOString();
-    await writeAccountsData(data);
+    const email = normalizeEmail(action.newEmail);
+    if (!email) throw new Error("New email is required.");
+    await admin.updateUser(action.accountId, { email, confirm: true });
+    await db.update(customerProfiles).set({ email, updatedAt }).where(eq(customerProfiles.id, action.accountId));
     return;
   }
 
@@ -341,17 +334,21 @@ export async function adminUpdateAccount(action:
     if (!Number.isFinite(action.points) || action.points < 0) {
       throw new Error("Points must be a non-negative number.");
     }
-
-    const orders = await getOrdersForEmail(target.email);
-    const basePoints = getOrderPoints(orders);
-    target.pointsAdjustment = Math.round(action.points) - basePoints;
-    target.updatedAt = new Date().toISOString();
-    await writeAccountsData(data);
+    const orders = await getOrdersForEmail(account.email);
+    const pointsAdjustment = Math.round(action.points) - getOrderPoints(orders);
+    await db
+      .update(customerProfiles)
+      .set({ pointsAdjustment, updatedAt })
+      .where(eq(customerProfiles.id, action.accountId));
     return;
   }
 
-  target.banned = action.banned;
-  target.banReason = action.banned ? action.reason?.trim() || "Banned by employee." : undefined;
-  target.updatedAt = new Date().toISOString();
-  await writeAccountsData(data);
+  await db
+    .update(customerProfiles)
+    .set({
+      banned: action.banned,
+      banReason: action.banned ? action.reason?.trim() || "Banned by administrator." : null,
+      updatedAt,
+    })
+    .where(eq(customerProfiles.id, action.accountId));
 }
