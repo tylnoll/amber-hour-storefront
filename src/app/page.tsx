@@ -8,21 +8,20 @@ export default function Home() {
     <>
       <section className="flex min-h-[90vh] flex-col items-center justify-center px-6 text-center">
         <p className="eyebrow motion-safe:animate-[rise_900ms_ease_200ms_forwards] motion-reduce:opacity-100">
-          Small-batch · Full-spectrum · Hand-poured
+          Welcome!
         </p>
         <h1 className="mt-5 max-w-[16ch] text-6xl leading-[0.95] md:text-8xl">
-          Your evening, <span className="italic">ritualized.</span>
+          Welcome to Amber Hour.
         </h1>
         <p className="mt-6 max-w-[38ch] text-lg text-[var(--cream-dim)]">
-          Honey, tea, candlelight, and balm. Four small rituals for the hours between work and
-          rest, made with CBD grown and infused by hand.
+          Small-batch THC/CBD products made with care.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <Link href="/shop" className="focus-ring btn-primary px-8 py-4">
-            Begin the ritual
+            Shop now
           </Link>
-          <Link href="/bundles/evening-ritual-set" className="focus-ring btn-ghost px-8 py-4">
-            See the gift set
+          <Link href="/account" className="focus-ring btn-ghost px-8 py-4">
+            Join and track orders
           </Link>
         </div>
         <div className="mt-16 flex gap-[3vw]">
@@ -39,10 +38,10 @@ export default function Home() {
       <section className="px-[5vw] py-24" id="ritual">
         <Reveal className="mx-auto w-[min(1200px,100%)]">
           <p className="eyebrow">07:00 PM - 10:00 PM</p>
-          <h2 className="mt-3 text-5xl">An evening, in four parts.</h2>
+          <h2 className="mt-3 text-5xl">Easy products, clear labels, no mystery.</h2>
           <p className="mt-4 max-w-2xl text-[var(--cream-dim)]">
-            Each product is built for a specific hour of winding down. Start wherever your evening
-            starts.
+            We keep things simple: what plant line was used, what batch it came from, and how to
+            use it at home.
           </p>
         </Reveal>
 
@@ -69,8 +68,8 @@ export default function Home() {
             time="9:00"
             moment="Apply"
             title="Roll-On Balm"
-            tag="Fastest ritual"
-            description="Three rolls on the wrist or neck. Many customers use this as the easiest first step into CBD rituals."
+            tag="Quickest option"
+            description="Three rolls on the wrist or neck for a fast, no-fuss CBD option."
             href="/shop/balms-roll-ons"
             cta="Shop roll-ons"
           />
@@ -92,11 +91,10 @@ export default function Home() {
             <div className="h-9 w-3 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] bg-[linear-gradient(180deg,#fff2c9,var(--gold)_60%,var(--ember))] shadow-[0_0_40px_10px_rgba(232,165,75,0.5)] motion-safe:animate-[flicker_2.6s_ease-in-out_infinite]" />
           </div>
           <div>
-            <p className="eyebrow">The Complete Ritual</p>
-            <h2 className="mt-3 text-5xl">The Evening Ritual Set.</h2>
+            <p className="eyebrow">Build your own set</p>
+            <h2 className="mt-3 text-5xl">Build your own evening arc.</h2>
             <p className="mt-4 text-[var(--cream-dim)]">
-              All four hours, boxed. Built for gifting and for people who need permission to slow
-              down.
+              Pick tea, candle, balm, and honey individually to personalize your own routine.
             </p>
             <ul className="mt-6 space-y-2 text-[var(--cream-dim)]">
               <li>Wind Down Tea - 20-bag tin</li>
@@ -104,8 +102,8 @@ export default function Home() {
               <li>Roll-On Balm - 10 ml</li>
               <li>Raw CBD Honey - 4 oz jar</li>
             </ul>
-            <Link href="/bundles/evening-ritual-set" className="focus-ring btn-primary mt-8 inline-block px-8 py-4">
-              Gift the ritual
+            <Link href="/shop" className="focus-ring btn-primary mt-8 inline-block px-8 py-4">
+              Shop all products
             </Link>
           </div>
         </Reveal>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const COOKIE_KEY = "amber_hour_age_verified";
@@ -10,11 +10,31 @@ function getCookie(name: string) {
   return match ? match[2] : null;
 }
 
+function getVerificationSnapshot() {
+  if (typeof window === "undefined") return true;
+  return Boolean(sessionStorage.getItem(COOKIE_KEY) || getCookie(COOKIE_KEY));
+}
+
+function subscribeVerification(onStoreChange: () => void) {
+  if (typeof window === "undefined") return () => {};
+
+  const handleChange = () => onStoreChange();
+  window.addEventListener("storage", handleChange);
+  window.addEventListener("focus", handleChange);
+
+  return () => {
+    window.removeEventListener("storage", handleChange);
+    window.removeEventListener("focus", handleChange);
+  };
+}
+
 export function AgeGateModal() {
-  const [hasVerified, setHasVerified] = useState(() => {
-    if (typeof window === "undefined") return true;
-    return Boolean(sessionStorage.getItem(COOKIE_KEY) || getCookie(COOKIE_KEY));
-  });
+  const [, forceRender] = useState(0);
+  const hasVerified = useSyncExternalStore(
+    subscribeVerification,
+    getVerificationSnapshot,
+    () => true,
+  );
   const router = useRouter();
   const pathname = usePathname();
 
@@ -37,7 +57,7 @@ export function AgeGateModal() {
             onClick={() => {
               sessionStorage.setItem(COOKIE_KEY, "true");
               document.cookie = `${COOKIE_KEY}=true; Max-Age=${60 * 60 * 24 * 30}; path=/`;
-              setHasVerified(true);
+              forceRender((value) => value + 1);
             }}
           >
             Yes, I am 21+

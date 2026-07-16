@@ -1,0 +1,54 @@
+{
+  "posts": [
+    {
+      "slug": "banana-banshee-seed-sprouted-update",
+      "title": "Grow Update: Banana Banshee Seed Has Sprouted",
+      "excerpt": "Quick greenhouse update: the Banana Banshee seed has sprouted and we are watching early growth.",
+      "readingTime": "2 min read",
+      "content": [
+        "Good news from the grow room: the Banana Banshee seed has officially sprouted.",
+        "Right now we are monitoring root strength, leaf development, and stability over the next few days.",
+        "If this run stays healthy, it will be considered for a future small-batch release.",
+        "[Update]\nToday we checked on the plant to see that it has spouted yay!! We will be sure to keep you guys updated on the plant progress. Hoping by the start of next week the plant sound start to be more developed"
+      ],
+      "createdAt": "2026-07-13T12:00:00.000Z",
+      "updatedAt": "2026-07-14T17:25:44.465Z"
+    },
+    {
+      "slug": "how-to-build-an-evening-ritual",
+      "title": "How To Build An Evening Ritual That Actually Sticks",
+      "excerpt": "Small sequence, same cue, low effort. Here is the framework we use in-house.",
+      "readingTime": "4 min read",
+      "content": [
+        "Most routines fail because they ask too much too fast. Evening rituals work when they are sensory and repeatable.",
+        "Pick one anchor hour first. Tea at 7pm. Keep it there for two weeks. Then stack the next step.",
+        "You are not chasing perfection. You are building a signal your body can trust."
+      ],
+      "createdAt": "2026-06-30T12:00:00.000Z"
+    },
+    {
+      "slug": "what-a-coa-means",
+      "title": "What A COA Means, In Plain Language",
+      "excerpt": "A quick guide to batch numbers, THC percentages, and why third-party reports matter.",
+      "readingTime": "3 min read",
+      "content": [
+        "A COA is a Certificate of Analysis issued by an independent lab. It verifies cannabinoid content and safety screening.",
+        "Match the batch number on your product to the batch in our lab report library.",
+        "If you ever have questions about a report, send us the batch number and we will walk through it with you."
+      ],
+      "createdAt": "2026-06-22T12:00:00.000Z"
+    },
+    {
+      "slug": "why-low-melt-wax",
+      "title": "Why We Formulate With Low-Melt Wax",
+      "excerpt": "Comfort is chemistry. Here is why our two-way candle melts differently.",
+      "readingTime": "5 min read",
+      "content": [
+        "Our candle blend is tuned to melt just above body temperature. That allows a smooth spread without a greasy finish.",
+        "We keep fragrance load restrained so scent supports the room instead of taking over it.",
+        "The point is transition: light, breathe, then use the warm oil to close the loop."
+      ],
+      "createdAt": "2026-06-10T12:00:00.000Z"
+    }
+  ]
+}

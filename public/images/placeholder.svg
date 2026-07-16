@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bgp" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1E1930"/>
+      <stop offset="100%" stop-color="#16111F"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bgp)"/>
+  <rect x="300" y="200" width="200" height="200" rx="16" fill="none" stroke="rgba(251,241,225,0.15)" stroke-width="2"/>
+  <line x1="300" y1="200" x2="500" y2="400" stroke="rgba(251,241,225,0.1)" stroke-width="1.5"/>
+  <line x1="500" y1="200" x2="300" y2="400" stroke="rgba(251,241,225,0.1)" stroke-width="1.5"/>
+  <text x="400" y="430" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="rgba(251,241,225,0.3)" letter-spacing="3">AMBER HOUR</text>
+</svg>

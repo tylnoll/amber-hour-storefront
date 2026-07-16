@@ -18,7 +18,6 @@ export function Footer() {
               <li><Link href="/shop/tea" className="focus-ring">Tea Blends</Link></li>
               <li><Link href="/shop/candles" className="focus-ring">Candles</Link></li>
               <li><Link href="/shop/balms-roll-ons" className="focus-ring">Balms and Roll-Ons</Link></li>
-              <li><Link href="/bundles/evening-ritual-set" className="focus-ring">Gift Sets</Link></li>
             </ul>
           </div>
           <div>
@@ -37,6 +36,7 @@ export function Footer() {
               <li><Link href="/account" className="focus-ring">Account</Link></li>
               <li><Link href="/privacy" className="focus-ring">Privacy</Link></li>
               <li><Link href="/terms" className="focus-ring">Terms</Link></li>
+              <li><Link href="/admin" className="focus-ring opacity-50 hover:opacity-80">Employee Login</Link></li>
             </ul>
           </div>
         </div>

@@ -6,24 +6,25 @@
       "name": "Wind Down Tea",
       "category": "tea",
       "shortDescription": "Chamomile and lavender loose-leaf with clean-dissolving CBD.",
-      "description": "A floral evening steep designed for slower breathing and a gentler handoff into night. Many customers use this as their first ritual marker after work.",
+      "description": "A floral tea blend with chamomile, lavender, and lemon balm. This batch is designed for a smooth wind-down without heavy sweetness or artificial flavoring.",
       "ingredients": [
         "Chamomile",
         "Lavender",
         "Lemon balm",
         "CBD isolate"
       ],
-      "howToUse": "Steep 1 tablespoon for 5-7 minutes. Add honey if you like a warmer finish.",
+      "howToUse": "Use 1 tablespoon per cup. Steep 5-7 minutes in hot water, strain, then add honey if desired. Start with one cup and adjust based on your routine.",
       "potencyMgCBD": 30,
       "thcPercent": "0.09%",
       "batchNumber": "AH-TEA-2407",
       "coaPdfUrl": "/coas/AH-TEA-2407.pdf",
       "recommended": true,
       "basePrice": 24,
+      "inventoryQuantity": 24,
       "imageAlt": "Amber Hour Wind Down Tea tin with loose leaves and chamomile blossoms",
       "images": [
-        "/images/tea-1.jpg",
-        "/images/tea-2.jpg"
+        "/images/tea-1.svg",
+        "/images/tea-2.svg"
       ],
       "variants": [
         {
@@ -42,24 +43,25 @@
       "name": "Two-Way Candle",
       "category": "candles",
       "shortDescription": "Low-melt soy candle that doubles as warm massage oil.",
-      "description": "Burn for 15-20 minutes and blow it out. The pooled wax stays skin-safe and smooth for shoulder or hand massage.",
+      "description": "A low-melt soy and coconut candle made for both scent and skin use. After burning, the top layer melts into a warm oil blend that can be used for shoulder, neck, or hand massage.",
       "ingredients": [
         "Soy wax",
         "Coconut oil",
         "Cedar and clove fragrance",
         "CBD distillate"
       ],
-      "howToUse": "Burn until a wax pool forms, extinguish, then apply a small amount to skin.",
+      "howToUse": "Burn 10-20 minutes until a wax pool forms. Blow out the flame, wait briefly, test temperature, then apply a small amount to skin. Never apply while too hot.",
       "potencyMgCBD": 50,
       "thcPercent": "0.19%",
       "batchNumber": "AH-CND-2412",
       "coaPdfUrl": "/coas/AH-CND-2412.pdf",
       "bestSeller": true,
       "basePrice": 38,
+      "inventoryQuantity": 18,
       "imageAlt": "Amber Hour Two-Way Candle in amber glass with cedar notes",
       "images": [
-        "/images/candle-1.jpg",
-        "/images/candle-2.jpg"
+        "/images/candle-1.svg",
+        "/images/candle-2.svg"
       ],
       "variants": [
         {
@@ -73,29 +75,67 @@
       ]
     },
     {
+      "id": "prod_raw_honey",
+      "slug": "raw-cbd-honey",
+      "name": "Raw CBD Honey",
+      "category": "honey",
+      "shortDescription": "Never boiled, fully emulsified honey for tea or toast.",
+      "description": "Small-batch infused honey made for even consistency and easy dosing in everyday foods and drinks.",
+      "ingredients": [
+        "Raw wildflower honey",
+        "CBD distillate"
+      ],
+      "howToUse": "Start with 1 teaspoon in tea, yogurt, or on toast. Wait and gauge effect before increasing to a larger serving.",
+      "potencyMgCBD": 35,
+      "thcPercent": "0.12%",
+      "batchNumber": "AH-HNY-2411",
+      "coaPdfUrl": "/coas/AH-HNY-2411.pdf",
+      "bestSeller": true,
+      "basePrice": 40,
+      "inventoryQuantity": 8,
+      "imageAlt": "Amber Hour Raw CBD Honey jar with wooden dipper",
+      "images": [
+        "/images/honey-1.svg",
+        "/images/honey-2.svg"
+      ],
+      "variants": [
+        {
+          "id": "honey_4oz",
+          "name": "4 oz",
+          "price": 40
+        },
+        {
+          "id": "honey_8oz",
+          "name": "8 oz",
+          "price": 70
+        }
+      ]
+    },
+    {
       "id": "prod_roll_on_balm",
       "slug": "roll-on-balm",
       "name": "Roll-On Balm",
       "category": "balms-roll-ons",
       "shortDescription": "Pocket roll-on for neck and wrist in seconds.",
-      "description": "The quickest ritual in the line. Keep one in your bag and one on your nightstand.",
+      "description": "A pocket roll-on blend for quick topical use on wrists, neck, and temples. Designed for simple daily carry with a clean, non-greasy finish.",
       "ingredients": [
         "MCT oil",
         "Hemp extract",
         "Peppermint",
         "Lavender"
       ],
-      "howToUse": "Apply three passes on wrists, temples, or neck whenever you need to reset.",
+      "howToUse": "Apply 2-3 passes to wrists, neck, or temples. Let it absorb for 1-2 minutes before reapplying. For external use only.",
       "potencyMgCBD": 25,
       "thcPercent": "0.08%",
       "batchNumber": "AH-RLB-2409",
       "coaPdfUrl": "/coas/AH-RLB-2409.pdf",
       "recommended": true,
       "basePrice": 18,
-      "imageAlt": "Amber Hour Roll-On Balm bottle with matte black cap",
+      "inventoryQuantity": 10,
+      "imageAlt": "Amber Hour Roll-On Balm bottle with silver roller ball",
       "images": [
-        "/images/rollon-1.jpg",
-        "/images/rollon-2.jpg"
+        "/images/rollon-1.svg",
+        "/images/rollon-2.svg"
       ],
       "variants": [
         {
@@ -103,79 +143,16 @@
           "name": "10 ml"
         }
       ]
-    },
-    {
-      "id": "prod_raw_honey",
-      "slug": "raw-cbd-honey",
-      "name": "Raw CBD Honey",
-      "category": "honey",
-      "shortDescription": "Never boiled, fully emulsified honey for tea or toast.",
-      "description": "Gently warmed so cannabinoids stay intact, then emulsified for an even spoon every time.",
-      "ingredients": [
-        "Raw wildflower honey",
-        "CBD distillate"
-      ],
-      "howToUse": "Use one teaspoon in tea, yogurt, or straight from the spoon.",
-      "potencyMgCBD": 35,
-      "thcPercent": "0.12%",
-      "batchNumber": "AH-HNY-2411",
-      "coaPdfUrl": "/coas/AH-HNY-2411.pdf",
-      "bestSeller": true,
-      "basePrice": 28,
-      "imageAlt": "Amber Hour Raw CBD Honey jar with wooden dipper",
-      "images": [
-        "/images/honey-1.jpg",
-        "/images/honey-2.jpg"
-      ],
-      "variants": [
-        {
-          "id": "honey_4oz",
-          "name": "4 oz"
-        },
-        {
-          "id": "honey_8oz",
-          "name": "8 oz"
-        }
-      ]
-    },
-    {
-      "id": "prod_bundle_evening",
-      "slug": "evening-ritual-set",
-      "name": "Evening Ritual Set",
-      "category": "bundles",
-      "shortDescription": "All four rituals in one gift-ready set.",
-      "description": "The full evening arc in one box: tea, candle, roll-on, and honey.",
-      "ingredients": [
-        "Mixed kit"
-      ],
-      "howToUse": "Start at any hour and stack rituals as needed.",
-      "potencyMgCBD": 140,
-      "thcPercent": "0.22%",
-      "batchNumber": "AH-BND-2413",
-      "coaPdfUrl": "/coas/AH-BND-2413.pdf",
-      "bestSeller": true,
-      "recommended": true,
-      "basePrice": 86,
-      "imageAlt": "Amber Hour Evening Ritual Set gift box with four products",
-      "images": [
-        "/images/bundle-1.jpg",
-        "/images/bundle-2.jpg"
-      ],
-      "variants": [
-        {
-          "id": "bundle_standard",
-          "name": "Standard set"
-        }
-      ]
     }
   ],
   "settings": {
     "announcement": "",
+    "lowStockThreshold": 5,
     "sale": {
       "active": false,
       "percentOff": 0,
       "label": ""
     }
   },
-  "updatedAt": "2026-07-13T16:43:06.823Z"
+  "updatedAt": "2026-07-14T17:36:42.617Z"
 }

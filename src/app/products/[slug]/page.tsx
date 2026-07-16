@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductPurchasePanel } from "@/components/product-purchase-panel";
@@ -25,11 +26,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className="mx-auto grid w-[min(1200px,100%)] gap-10 lg:grid-cols-[1.2fr_1fr]">
         <div className="space-y-4">
           {product.images.map((image, index) => (
-            <div
-              key={image}
-              className="aspect-[4/3] rounded-2xl border border-[var(--line)] bg-[radial-gradient(circle_at_20%_20%,rgba(232,165,75,0.3),rgba(74,42,69,0.4)_60%,rgba(22,17,31,0.95))] p-4"
-            >
-              <p className="text-xs text-[var(--cream-dim)]">{product.imageAlt} {index + 1}</p>
+            <div key={`${image}-${index}`} className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-[var(--line)]">
+              <Image
+                src={image}
+                alt={`${product.imageAlt} ${index + 1}`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                unoptimized
+                className="object-cover"
+              />
             </div>
           ))}
         </div>
@@ -57,7 +62,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </div>
 
       <section className="mx-auto mt-14 w-[min(1200px,100%)]">
-        <h2 className="text-4xl">Complete your ritual</h2>
+        <h2 className="text-4xl">More from our shop</h2>
         <div className="mt-6 grid gap-5 md:grid-cols-3">
           {crossSell.map((item) => (
             <Link

@@ -3,9 +3,22 @@ import { cookies } from "next/headers";
 import { AdminProfile } from "@/lib/types";
 
 const SESSION_COOKIE = "amber_hour_admin";
+const DEFAULT_SECRET = "change-this-admin-secret";
+const DEFAULT_USERNAME = "bstoner";
+const DEFAULT_PASSWORD = "stoner#1";
+
+function isProduction() {
+  return process.env.NODE_ENV === "production";
+}
 
 function getSecret() {
-  return process.env.ADMIN_SECRET ?? "change-this-admin-secret";
+  const secret = process.env.ADMIN_SECRET ?? DEFAULT_SECRET;
+
+  if (isProduction() && secret === DEFAULT_SECRET) {
+    throw new Error("ADMIN_SECRET must be set to a strong secret in production.");
+  }
+
+  return secret;
 }
 
 function sign(value: string) {
@@ -20,7 +33,9 @@ export function createAdminToken(username: string) {
 export function verifyAdminToken(token: string) {
   const [payload, signature] = token.split(".");
   if (!payload || !signature) return false;
-  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(sign(payload)));
+  const expected = sign(payload);
+  if (expected.length !== signature.length) return false;
+  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
 }
 
 export async function setAdminSession(username: string) {
@@ -47,10 +62,14 @@ export async function requireAdminSession() {
 }
 
 export function getAdminCredentials() {
-  return {
-    username: process.env.ADMIN_USERNAME ?? "amberhour-owner",
-    password: process.env.ADMIN_PASSWORD ?? "AmberHour!2026",
-  };
+  const username = process.env.ADMIN_USERNAME ?? DEFAULT_USERNAME;
+  const password = process.env.ADMIN_PASSWORD ?? DEFAULT_PASSWORD;
+
+  if (isProduction() && (username === DEFAULT_USERNAME || password === DEFAULT_PASSWORD)) {
+    throw new Error("ADMIN_USERNAME and ADMIN_PASSWORD must be set to non-default values in production.");
+  }
+
+  return { username, password };
 }
 
 export function getAdminProfile(): AdminProfile {
@@ -58,8 +77,8 @@ export function getAdminProfile(): AdminProfile {
 
   return {
     username,
-    displayName: "Amber Hour Master Admin",
-    rank: "Sovereign Owner",
+    displayName: "Brian Stoner",
+    rank: "Founder",
     roles: ["super-admin", "catalog-admin", "pricing-admin", "marketing-admin", "ops-admin"],
     permissions: [
       "product:create",

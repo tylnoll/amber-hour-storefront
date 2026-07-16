@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg1" cx="35%" cy="25%" r="75%">
+      <stop offset="0%" stop-color="#2B1F40"/>
+      <stop offset="100%" stop-color="#16111F"/>
+    </radialGradient>
+    <radialGradient id="glow1" cx="50%" cy="52%" r="42%">
+      <stop offset="0%" stop-color="#E8A54B" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#E8A54B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tin" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E2E1A"/>
+      <stop offset="40%" stop-color="#2A3E24"/>
+      <stop offset="100%" stop-color="#1A2A16"/>
+    </linearGradient>
+    <linearGradient id="lid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8A54B"/>
+      <stop offset="50%" stop-color="#D4922A"/>
+      <stop offset="100%" stop-color="#C07818"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg1)"/>
+  <ellipse cx="400" cy="310" rx="240" ry="200" fill="url(#glow1)"/>
+  <!-- Tin body -->
+  <rect x="260" y="195" width="280" height="270" rx="10" fill="url(#tin)" stroke="#4A6A40" stroke-width="1.5"/>
+  <!-- Lid top -->
+  <ellipse cx="400" cy="195" rx="145" ry="22" fill="url(#lid)"/>
+  <!-- Lid rim -->
+  <rect x="255" y="185" width="290" height="28" rx="6" fill="#E8A54B" opacity="0.9"/>
+  <!-- Lid highlight -->
+  <rect x="262" y="188" width="270" height="8" rx="3" fill="#F4C06A" opacity="0.5"/>
+  <!-- Label area -->
+  <rect x="270" y="215" width="260" height="235" rx="6" fill="#0D1A0A" opacity="0.55"/>
+  <!-- Brand name -->
+  <text x="400" y="256" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#E8A54B" letter-spacing="5" opacity="0.9">AMBER HOUR</text>
+  <!-- Divider line -->
+  <line x1="305" y1="265" x2="495" y2="265" stroke="#E8A54B" stroke-width="0.8" opacity="0.5"/>
+  <!-- Product name -->
+  <text x="400" y="304" text-anchor="middle" font-family="Georgia,serif" font-size="30" font-style="italic" fill="#FBF1E1">Wind Down</text>
+  <text x="400" y="338" text-anchor="middle" font-family="Georgia,serif" font-size="30" font-style="italic" fill="#FBF1E1">Tea</text>
+  <!-- Divider line -->
+  <line x1="320" y1="350" x2="480" y2="350" stroke="#E8A54B" stroke-width="0.8" opacity="0.5"/>
+  <!-- CBD info -->
+  <text x="400" y="375" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#A89878" letter-spacing="3">30mg CBD · LOOSE LEAF</text>
+  <!-- Chamomile left -->
+  <circle cx="295" cy="305" r="9" fill="#E8A54B" opacity="0.18"/>
+  <circle cx="295" cy="305" r="5" fill="#E8C06A" opacity="0.4"/>
+  <ellipse cx="287" cy="298" rx="4" ry="7" fill="#E8E0B0" opacity="0.35" transform="rotate(-30 287 298)"/>
+  <ellipse cx="295" cy="292" rx="4" ry="7" fill="#E8E0B0" opacity="0.35" transform="rotate(10 295 292)"/>
+  <ellipse cx="303" cy="298" rx="4" ry="7" fill="#E8E0B0" opacity="0.35" transform="rotate(50 303 298)"/>
+  <!-- Chamomile right -->
+  <circle cx="505" cy="305" r="9" fill="#E8A54B" opacity="0.18"/>
+  <circle cx="505" cy="305" r="5" fill="#E8C06A" opacity="0.4"/>
+  <ellipse cx="497" cy="298" rx="4" ry="7" fill="#E8E0B0" opacity="0.35" transform="rotate(-30 497 298)"/>
+  <ellipse cx="505" cy="292" rx="4" ry="7" fill="#E8E0B0" opacity="0.35" transform="rotate(10 505 292)"/>
+  <ellipse cx="513" cy="298" rx="4" ry="7" fill="#E8E0B0" opacity="0.35" transform="rotate(50 513 298)"/>
+  <!-- Tin bottom shadow -->
+  <ellipse cx="400" cy="468" rx="148" ry="12" fill="#000" opacity="0.35"/>
+  <!-- Bottom foot -->
+  <rect x="272" y="458" width="256" height="10" rx="5" fill="#1A2A16" stroke="#4A6A40" stroke-width="1"/>
+</svg>

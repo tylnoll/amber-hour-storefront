@@ -8,9 +8,9 @@
   --night: #221a2e;
   --night-deep: #16111f;
   --cream: #fbf1e1;
-  --cream-dim: #e9dcc4;
+  --cream-dim: #f0e6d6;
   --ember: #c4562e;
-  --gold: #e8a54b;
+  --gold: #f2c879;
   --sage: #93a583;
   --line: rgba(251, 241, 225, 0.14);
 }
@@ -46,7 +46,8 @@ h4 {
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: var(--gold);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .focus-ring:focus-visible {

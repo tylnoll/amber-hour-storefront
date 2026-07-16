@@ -1,13 +1,15 @@
 import { notFound } from "next/navigation";
-import { blogPosts, getBlogPostBySlug } from "@/lib/blog";
+import { BlogPostTimestamp } from "@/components/blog-post-timestamp";
+import { getBlogDateLabel, getBlogPostBySlug, getBlogPosts } from "@/lib/blog";
 
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) notFound();
 
@@ -17,13 +19,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <p className="eyebrow">Blog</p>
         <h1 className="mt-2 text-6xl">{post.title}</h1>
         <p className="mt-3 text-sm uppercase tracking-[0.14em] text-[var(--cream-dim)]">
-          {post.date} · {post.readingTime}
+          {getBlogDateLabel(post.createdAt)} · {post.readingTime}
         </p>
         <div className="mt-8 space-y-5 text-lg leading-8 text-[var(--cream-dim)]">
           {post.content.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
+        <BlogPostTimestamp createdAt={post.createdAt} updatedAt={post.updatedAt} />
       </div>
     </article>
   );

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg7" cx="45%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#1A1630"/>
+      <stop offset="100%" stop-color="#16111F"/>
+    </radialGradient>
+    <radialGradient id="bottleglow" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#6A50A0" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#6A50A0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bottle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1A1428" stop-opacity="0.85"/>
+      <stop offset="25%" stop-color="#2E2640" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#241E38" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#161224" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="roller" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E8E0D4"/>
+      <stop offset="40%" stop-color="#C8C0B4"/>
+      <stop offset="100%" stop-color="#989090"/>
+    </linearGradient>
+    <linearGradient id="cap" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3A3248"/>
+      <stop offset="100%" stop-color="#221E30"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg7)"/>
+  <ellipse cx="400" cy="320" rx="160" ry="260" fill="url(#bottleglow)"/>
+  <!-- Bottle cap area (top) -->
+  <rect x="368" y="100" width="64" height="30" rx="8" fill="url(#cap)" stroke="#4A4260" stroke-width="1"/>
+  <!-- Roller collar -->
+  <rect x="360" y="126" width="80" height="22" rx="5" fill="#5A526A" stroke="#7A7090" stroke-width="1"/>
+  <!-- Roller ball -->
+  <ellipse cx="400" cy="148" rx="24" ry="20" fill="url(#roller)"/>
+  <!-- Roller highlight -->
+  <ellipse cx="394" cy="141" rx="10" ry="8" fill="#FFFBE8" opacity="0.5"/>
+  <!-- Roller shadow -->
+  <ellipse cx="408" cy="156" rx="8" ry="6" fill="#000" opacity="0.2"/>
+  <!-- Bottle neck -->
+  <rect x="372" y="166" width="56" height="50" rx="4" fill="url(#bottle)" stroke="#3A3250" stroke-width="1"/>
+  <!-- Bottle body -->
+  <rect x="336" y="212" width="128" height="260" rx="18" fill="url(#bottle)" stroke="#3A3250" stroke-width="1.5"/>
+  <!-- Glass sheen left -->
+  <rect x="342" y="220" width="14" height="244" rx="5" fill="#FFFBE8" opacity="0.07"/>
+  <!-- Glass sheen right faint -->
+  <rect x="450" y="224" width="8" height="240" rx="4" fill="#000" opacity="0.1"/>
+  <!-- Label area -->
+  <rect x="347" y="240" width="106" height="168" rx="5" fill="#0E0C18" opacity="0.5"/>
+  <!-- Gold divider top -->
+  <line x1="354" y1="258" x2="446" y2="258" stroke="#E8A54B" stroke-width="0.8" opacity="0.6"/>
+  <!-- Brand initials -->
+  <text x="400" y="294" text-anchor="middle" font-family="Georgia,serif" font-size="32" font-style="italic" fill="#E8A54B" opacity="0.9">AH</text>
+  <!-- Product name -->
+  <text x="400" y="320" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#FBF1E1" letter-spacing="2" opacity="0.75">ROLL-ON BALM</text>
+  <!-- CBD info -->
+  <text x="400" y="340" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#A898B8" letter-spacing="2">25mg CBD</text>
+  <!-- Gold divider bottom -->
+  <line x1="354" y1="355" x2="446" y2="355" stroke="#E8A54B" stroke-width="0.8" opacity="0.6"/>
+  <!-- Volume -->
+  <text x="400" y="380" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#9080A8" letter-spacing="2" opacity="0.7">10 ml</text>
+  <!-- Lavender sprig decoration (subtle) -->
+  <line x1="376" y1="418" x2="376" y2="455" stroke="#7A70A8" stroke-width="1.5" opacity="0.4"/>
+  <ellipse cx="372" cy="416" rx="4" ry="6" fill="#8878B8" opacity="0.35" transform="rotate(-15 372 416)"/>
+  <ellipse cx="380" cy="408" rx="4" ry="6" fill="#8878B8" opacity="0.3" transform="rotate(15 380 408)"/>
+  <line x1="424" y1="418" x2="424" y2="455" stroke="#7A70A8" stroke-width="1.5" opacity="0.4"/>
+  <ellipse cx="420" cy="416" rx="4" ry="6" fill="#8878B8" opacity="0.35" transform="rotate(-15 420 416)"/>
+  <ellipse cx="428" cy="408" rx="4" ry="6" fill="#8878B8" opacity="0.3" transform="rotate(15 428 408)"/>
+  <!-- Floor shadow -->
+  <ellipse cx="400" cy="482" rx="75" ry="10" fill="#000" opacity="0.4"/>
+</svg>

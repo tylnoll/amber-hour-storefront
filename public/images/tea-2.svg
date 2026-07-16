@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg2" cx="60%" cy="35%" r="80%">
+      <stop offset="0%" stop-color="#1E2B1A"/>
+      <stop offset="100%" stop-color="#16111F"/>
+    </radialGradient>
+    <radialGradient id="steam" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FBF1E1" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#FBF1E1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg2)"/>
+  <!-- Scattered leaves -->
+  <ellipse cx="200" cy="180" rx="18" ry="7" fill="#3A5A2A" opacity="0.8" transform="rotate(25 200 180)"/>
+  <ellipse cx="580" cy="420" rx="22" ry="8" fill="#2E4A22" opacity="0.7" transform="rotate(-40 580 420)"/>
+  <ellipse cx="150" cy="380" rx="15" ry="6" fill="#4A6A36" opacity="0.65" transform="rotate(60 150 380)"/>
+  <ellipse cx="640" cy="200" rx="20" ry="7" fill="#3A5A2A" opacity="0.75" transform="rotate(-15 640 200)"/>
+  <ellipse cx="320" cy="120" rx="12" ry="5" fill="#2E4A22" opacity="0.6" transform="rotate(45 320 120)"/>
+  <ellipse cx="500" cy="490" rx="16" ry="6" fill="#4A6A36" opacity="0.7" transform="rotate(-30 500 490)"/>
+  <!-- Tea pouring scene - cup silhouette -->
+  <ellipse cx="400" cy="410" rx="130" ry="40" fill="#1A1424" stroke="#E8A54B" stroke-width="1.5" opacity="0.9"/>
+  <path d="M270 370 Q290 280 400 270 Q510 280 530 370" fill="#1A1424" stroke="#E8A54B" stroke-width="1.5" opacity="0.9"/>
+  <!-- Tea in cup - amber liquid -->
+  <ellipse cx="400" cy="368" rx="120" ry="28" fill="#6B3E0A" opacity="0.8"/>
+  <!-- Steam wisps -->
+  <path d="M360 260 Q352 230 362 200 Q372 170 360 140" fill="none" stroke="#FBF1E1" stroke-width="2.5" stroke-linecap="round" opacity="0.25"/>
+  <path d="M400 255 Q392 220 402 188 Q412 156 400 124" fill="none" stroke="#FBF1E1" stroke-width="2.5" stroke-linecap="round" opacity="0.2"/>
+  <path d="M440 260 Q448 228 438 196 Q428 164 440 132" fill="none" stroke="#FBF1E1" stroke-width="2.5" stroke-linecap="round" opacity="0.25"/>
+  <!-- Chamomile blossoms floating -->
+  <circle cx="310" cy="300" r="14" fill="#E8A54B" opacity="0.15"/>
+  <circle cx="310" cy="300" r="7" fill="#F4C040" opacity="0.5"/>
+  <ellipse cx="297" cy="291" rx="6" ry="10" fill="#FFFBE8" opacity="0.55" transform="rotate(-35 297 291)"/>
+  <ellipse cx="310" cy="286" rx="6" ry="10" fill="#FFFBE8" opacity="0.55" transform="rotate(5 310 286)"/>
+  <ellipse cx="323" cy="291" rx="6" ry="10" fill="#FFFBE8" opacity="0.55" transform="rotate(45 323 291)"/>
+  <ellipse cx="323" cy="308" rx="6" ry="10" fill="#FFFBE8" opacity="0.45" transform="rotate(80 323 308)"/>
+  <ellipse cx="297" cy="308" rx="6" ry="10" fill="#FFFBE8" opacity="0.45" transform="rotate(-70 297 308)"/>
+  <!-- Small blossom right -->
+  <circle cx="500" cy="270" r="10" fill="#F4C040" opacity="0.4"/>
+  <ellipse cx="490" cy="262" rx="5" ry="8" fill="#FFFBE8" opacity="0.45" transform="rotate(-35 490 262)"/>
+  <ellipse cx="500" cy="258" rx="5" ry="8" fill="#FFFBE8" opacity="0.45" transform="rotate(5 500 258)"/>
+  <ellipse cx="510" cy="262" rx="5" ry="8" fill="#FFFBE8" opacity="0.45" transform="rotate(45 510 262)"/>
+  <!-- Text label -->
+  <text x="400" y="498" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#E8A54B" letter-spacing="5" opacity="0.8">WIND DOWN TEA · AMBER HOUR</text>
+</svg>

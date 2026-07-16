@@ -23,13 +23,14 @@ export default function LabReportsPage() {
         <p className="eyebrow">Transparency</p>
         <h1 className="mt-2 text-6xl">Lab reports</h1>
         <p className="mt-4 text-[var(--cream-dim)]">
-          Search by batch number to match your package label to its COA.
+          Lab reports are currently N/A while we finish growing and curing the first full batch.
+          COAs will be published here as soon as testing is complete.
         </p>
 
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search batch or product"
+          placeholder="Search batch or product (currently N/A)"
           className="focus-ring mt-6 w-full max-w-md rounded-full border border-[var(--line)] bg-transparent px-5 py-3"
         />
 
@@ -43,9 +44,15 @@ export default function LabReportsPage() {
                     Batch {report.batchNumber} · THC {report.thcPercent} · Tested {report.testedOn}
                   </p>
                 </div>
-                <Link href={report.pdfUrl} target="_blank" className="focus-ring btn-ghost px-4 py-2 text-sm">
-                  Open COA PDF
-                </Link>
+                {report.pdfUrl === "#" ? (
+                  <span className="rounded-full border border-[var(--line)] px-4 py-2 text-sm text-[var(--cream-dim)]">
+                    COA pending
+                  </span>
+                ) : (
+                  <Link href={report.pdfUrl} target="_blank" className="focus-ring btn-ghost px-4 py-2 text-sm">
+                    Open COA PDF
+                  </Link>
+                )}
               </div>
             </article>
           ))}

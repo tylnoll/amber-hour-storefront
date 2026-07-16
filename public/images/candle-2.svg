@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg4" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#2A1C0E"/>
+      <stop offset="100%" stop-color="#16111F"/>
+    </radialGradient>
+    <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F4E090" stop-opacity="0.95"/>
+      <stop offset="70%" stop-color="#E8C868" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#C8A048" stop-opacity="0.5"/>
+    </radialGradient>
+    <radialGradient id="innerflame" cx="50%" cy="75%" r="80%">
+      <stop offset="0%" stop-color="#FFFCE0"/>
+      <stop offset="40%" stop-color="#FFD040"/>
+      <stop offset="75%" stop-color="#E8602A"/>
+      <stop offset="100%" stop-color="#C4562E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowpool" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#F4C040" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#F4C040" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg4)"/>
+  <!-- Soft floor glow from wax pool -->
+  <ellipse cx="400" cy="390" rx="300" ry="180" fill="#E8A54B" opacity="0.12"/>
+  <!-- Top-down view of candle rim -->
+  <ellipse cx="400" cy="340" rx="190" ry="55" fill="#7A4818" opacity="0.7" stroke="#C87830" stroke-width="2"/>
+  <!-- Wax pool surface -->
+  <ellipse cx="400" cy="338" rx="178" ry="50" fill="url(#pool)"/>
+  <!-- Pool sheen -->
+  <ellipse cx="375" cy="326" rx="90" ry="22" fill="#FFFCE0" opacity="0.35"/>
+  <!-- Pool glow from flame -->
+  <ellipse cx="400" cy="316" rx="70" ry="28" fill="url(#glowpool)"/>
+  <!-- Wick shadow in wax -->
+  <ellipse cx="400" cy="320" rx="8" ry="5" fill="#8B6020" opacity="0.7"/>
+  <!-- Wick -->
+  <line x1="400" y1="320" x2="400" y2="270" stroke="#2A1A08" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Flame base glow -->
+  <ellipse cx="400" cy="270" rx="14" ry="8" fill="#FFD050" opacity="0.85"/>
+  <!-- Flame -->
+  <path d="M400 270 Q385 248 390 220 Q394 198 400 182 Q406 198 410 220 Q415 248 400 270Z" fill="url(#innerflame)" opacity="0.95"/>
+  <!-- Flame inner core -->
+  <path d="M400 268 Q393 250 397 230 Q399 216 400 207 Q401 216 403 230 Q407 250 400 268Z" fill="#FFFCE0" opacity="0.9"/>
+  <!-- Smoke wisp -->
+  <path d="M400 182 Q394 164 400 148 Q405 133 398 118" fill="none" stroke="#9A8878" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+  <!-- Cedar/botanical specks in wax -->
+  <rect x="350" y="340" width="6" height="3" rx="1" fill="#5A3A12" opacity="0.5" transform="rotate(25 350 340)"/>
+  <rect x="430" y="348" width="8" height="3" rx="1" fill="#5A3A12" opacity="0.4" transform="rotate(-15 430 348)"/>
+  <rect x="380" y="355" width="5" height="2" rx="1" fill="#5A3A12" opacity="0.45" transform="rotate(50 380 355)"/>
+  <rect x="460" y="338" width="7" height="3" rx="1" fill="#5A3A12" opacity="0.4" transform="rotate(-30 460 338)"/>
+  <!-- Label below -->
+  <text x="400" y="450" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#E8A54B" letter-spacing="5" opacity="0.7">AMBER HOUR · TWO-WAY CANDLE</text>
+  <text x="400" y="472" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#A88858" letter-spacing="3" opacity="0.65">CEDAR · CLOVE · 50mg CBD</text>
+</svg>

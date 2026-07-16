@@ -17,6 +17,10 @@ npm install
 ADMIN_USERNAME=amberhour-owner
 ADMIN_PASSWORD=AmberHour!2026
 ADMIN_SECRET=replace-with-a-long-random-secret
+ACCOUNT_SECRET=replace-with-a-second-long-random-secret
+
+# Persistent storage directory (required in production)
+DATA_DIR=./data
 
 # Stripe
 STRIPE_SECRET_KEY=sk_test_...
@@ -63,6 +67,27 @@ npm run build
 ## Deploy
 
 Deploy to Vercel and set the same environment variables in project settings.
+
+## Public Launch Requirements
+
+Before going live, complete these mandatory steps:
+
+1. Set strong secrets and credentials in production:
+
+- `ADMIN_SECRET`
+- `ACCOUNT_SECRET`
+- `ADMIN_USERNAME`
+- `ADMIN_PASSWORD`
+
+2. Configure persistent storage:
+
+- Set `DATA_DIR` to a mounted persistent volume path on your host.
+- This app intentionally requires `DATA_DIR` in production so updates survive restarts and deploys.
+
+3. Keep local secrets out of source control:
+
+- Never commit `.env.local`.
+- Rotate any live keys that were ever exposed.
 
 ## Deploy To GitHub Pages (Static Site)
 

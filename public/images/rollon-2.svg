@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg8" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#1C1830"/>
+      <stop offset="100%" stop-color="#16111F"/>
+    </radialGradient>
+    <radialGradient id="skinglow" cx="50%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#C87050" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#C87050" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg8)"/>
+  <ellipse cx="400" cy="380" rx="260" ry="180" fill="url(#skinglow)"/>
+  <!-- Wrist silhouette (subtle) -->
+  <path d="M180 430 Q220 390 320 370 Q380 360 460 370 Q560 380 620 420 Q640 440 640 480 Q580 500 200 500 Q160 490 180 430Z" fill="#C87848" opacity="0.12"/>
+  <!-- Roll-on being applied - close up of roller on skin -->
+  <!-- Forearm close up angled view -->
+  <path d="M200 480 Q260 440 400 430 Q540 440 600 480" fill="none" stroke="#B87040" stroke-width="1.5" opacity="0.25"/>
+  <!-- Roll-on bottle bottom angled -->
+  <rect x="348" y="140" width="104" height="200" rx="14" fill="#221E36" opacity="0.92" stroke="#3A3252" stroke-width="1.5"/>
+  <!-- Bottle sheen -->
+  <rect x="354" y="148" width="12" height="186" rx="4" fill="#FFFBE8" opacity="0.06"/>
+  <!-- Roller ball close up -->
+  <ellipse cx="400" cy="142" rx="34" ry="28" fill="#D8D0C8"/>
+  <ellipse cx="393" cy="133" rx="15" ry="12" fill="#FFFBE8" opacity="0.55"/>
+  <ellipse cx="408" cy="152" rx="10" ry="8" fill="#000" opacity="0.15"/>
+  <!-- Collar -->
+  <rect x="358" y="160" width="84" height="20" rx="5" fill="#5A5270" stroke="#7A72A0" stroke-width="1"/>
+  <!-- Botanical elements scattered around roller -->
+  <!-- Lavender sprigs -->
+  <line x1="240" y1="250" x2="260" y2="320" stroke="#8878B8" stroke-width="2" opacity="0.5"/>
+  <ellipse cx="237" cy="248" rx="5" ry="8" fill="#9080C0" opacity="0.4" transform="rotate(-10 237 248)"/>
+  <ellipse cx="246" cy="240" rx="5" ry="8" fill="#9080C0" opacity="0.4" transform="rotate(10 246 240)"/>
+  <ellipse cx="254" cy="248" rx="5" ry="8" fill="#9080C0" opacity="0.35" transform="rotate(30 254 248)"/>
+  <line x1="540" y1="260" x2="520" y2="330" stroke="#8878B8" stroke-width="2" opacity="0.45"/>
+  <ellipse cx="537" cy="256" rx="5" ry="8" fill="#9080C0" opacity="0.4" transform="rotate(-10 537 256)"/>
+  <ellipse cx="546" cy="248" rx="5" ry="8" fill="#9080C0" opacity="0.4" transform="rotate(10 546 248)"/>
+  <!-- Peppermint leaf -->
+  <ellipse cx="180" cy="350" rx="20" ry="10" fill="#3A8A50" opacity="0.4" transform="rotate(-30 180 350)"/>
+  <line x1="164" y1="347" x2="196" y2="353" stroke="#5AB070" stroke-width="1" opacity="0.35"/>
+  <ellipse cx="610" cy="330" rx="18" ry="9" fill="#3A8A50" opacity="0.35" transform="rotate(25 610 330)"/>
+  <!-- Droplet of oil -->
+  <path d="M480 370 Q484 360 480 350 Q476 340 480 330" fill="none" stroke="#E8C060" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+  <ellipse cx="480" cy="374" rx="7" ry="9" fill="#E8C060" opacity="0.55"/>
+  <!-- Text label -->
+  <text x="400" y="520" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#E8A54B" letter-spacing="5" opacity="0.65">AMBER HOUR · ROLL-ON BALM</text>
+  <text x="400" y="541" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#9880B0" letter-spacing="3" opacity="0.55">PEPPERMINT · LAVENDER · 25mg CBD</text>
+</svg>

@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { blogPosts } from "@/lib/blog";
+import { getBlogDateLabel, getBlogPosts } from "@/lib/blog";
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const blogPosts = await getBlogPosts();
+
   return (
     <section className="px-[5vw] py-16">
       <div className="mx-auto w-[min(1000px,100%)]">
@@ -11,7 +13,7 @@ export default function BlogPage() {
           {blogPosts.map((post) => (
             <article key={post.slug} className="rounded-2xl border border-[var(--line)] p-6">
               <p className="text-xs uppercase tracking-[0.14em] text-[var(--cream-dim)]">
-                {post.date} · {post.readingTime}
+                {getBlogDateLabel(post.createdAt)} · {post.readingTime}
               </p>
               <h2 className="mt-2 text-3xl">
                 <Link href={`/blog/${post.slug}`} className="focus-ring">

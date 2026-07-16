@@ -1,9 +1,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import Stripe from "stripe";
+import { getDataDir } from "@/lib/data-path";
 import { SyncedStripeOrder } from "@/lib/types";
 
-const stripeSyncPath = path.join(process.cwd(), "data", "stripe-sync.json");
+const stripeSyncPath = path.join(getDataDir(), "stripe-sync.json");
 
 export function isStripeConfigured() {
   return Boolean(process.env.STRIPE_SECRET_KEY);

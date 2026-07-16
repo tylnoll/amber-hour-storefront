@@ -1,23 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useCart } from "@/components/cart-context";
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
-  { href: "/bundles/evening-ritual-set", label: "Gift Set" },
   { href: "/about", label: "Our Story" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
-  { href: "/admin", label: "Admin" },
+  { href: "/account", label: "Account" },
 ];
 
 export function Nav() {
   const { itemCount, openCart } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isClient = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -43,7 +47,7 @@ export function Nav() {
         </div>
         <div className="flex items-center gap-2">
           <button type="button" className="focus-ring btn-ghost px-4 py-2 text-sm" onClick={openCart}>
-            Cart ({itemCount})
+            Cart ({isClient ? itemCount : 0})
           </button>
           <button
             type="button"
@@ -70,9 +74,6 @@ export function Nav() {
                 {link.label}
               </Link>
             ))}
-            <Link href="/account" className="focus-ring rounded-lg px-3 py-2 hover:bg-white/5">
-              Account
-            </Link>
           </div>
         </div>
       )}

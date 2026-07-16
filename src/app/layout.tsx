@@ -3,6 +3,7 @@ import { Fraunces, Manrope, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteShell } from "@/components/site-shell";
 import { AnnouncementBar } from "@/components/announcement-bar";
+import { FirstVisitOffer } from "@/components/first-visit-offer";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -23,7 +24,7 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: "Amber Hour",
-  description: "CBD rituals for the hours between work and rest.",
+  description: "Small-batch homemade THC/CBD products for everyday use.",
 };
 
 export default function RootLayout({
@@ -38,6 +39,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-transparent text-cream">
         <AnnouncementBar />
+        <FirstVisitOffer />
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

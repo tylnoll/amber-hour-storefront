@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "verify:local-config": "node scripts/verify-local-config.mjs",
+    "quality:check": "npm run lint && npm run build",
+    "local:verify": "npm run verify:local-config && npm run quality:check"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",
@@ -22,6 +25,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -8,7 +8,7 @@ export default async function ShopPage() {
     <ShopGrid
       products={allProducts.filter((product) => product.category !== "bundles")}
       heading="All products"
-      intro="Four rituals. One calm arc from evening to rest."
+      intro="Small-batch homemade THC/CBD products for everyday use."
     />
   );
 }

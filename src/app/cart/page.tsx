@@ -10,7 +10,7 @@ export default function CartPage() {
     <section className="px-[5vw] py-16">
       <div className="mx-auto w-[min(1000px,100%)]">
         <p className="eyebrow">Cart</p>
-        <h1 className="mt-2 text-6xl">Your Ritual Cart</h1>
+        <h1 className="mt-2 text-6xl">Your Cart</h1>
         <div className="mt-8 space-y-3">
           {lines.length === 0 && <p className="text-[var(--cream-dim)]">Cart is currently empty.</p>}
           {lines.map((line) => (

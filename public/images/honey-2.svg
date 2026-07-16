@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg6" cx="55%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#261A04"/>
+      <stop offset="100%" stop-color="#16111F"/>
+    </radialGradient>
+    <linearGradient id="dipper" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C8921A"/>
+      <stop offset="50%" stop-color="#9A6A10"/>
+      <stop offset="100%" stop-color="#7A4E08"/>
+    </linearGradient>
+    <radialGradient id="honeystream" cx="50%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#F4D040" stop-opacity="0.98"/>
+      <stop offset="60%" stop-color="#E8A030" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#C87818" stop-opacity="0.6"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg6)"/>
+  <!-- Warm glow below -->
+  <ellipse cx="400" cy="440" rx="200" ry="80" fill="#E8A54B" opacity="0.18"/>
+  <!-- Honey stream -->
+  <path d="M400 140 Q395 200 398 280 Q400 360 396 430 Q394 470 392 500" fill="none" stroke="url(#honeystream)" stroke-width="18" stroke-linecap="round" opacity="0.9"/>
+  <!-- Stream edge highlights -->
+  <path d="M393 140 Q388 200 390 280 Q392 360 388 430" fill="none" stroke="#FFFBE8" stroke-width="3" stroke-linecap="round" opacity="0.3"/>
+  <!-- Honey pool at bottom -->
+  <ellipse cx="392" cy="502" rx="48" ry="16" fill="#E8A030" opacity="0.75"/>
+  <ellipse cx="390" cy="500" rx="32" ry="10" fill="#F4D060" opacity="0.5"/>
+  <!-- Dipper handle - diagonal from top-right -->
+  <line x1="560" y1="80" x2="360" y2="380" stroke="url(#dipper)" stroke-width="14" stroke-linecap="round"/>
+  <!-- Dipper barrel (honey-soaked wood part) -->
+  <ellipse cx="375" cy="350" rx="22" ry="12" fill="#C87818" opacity="0.95" transform="rotate(-35 375 350)"/>
+  <rect x="356" y="328" width="38" height="46" rx="10" fill="#B86A10" opacity="0.9" transform="rotate(-35 375 350)"/>
+  <!-- Honey dripping off dipper tip -->
+  <path d="M362 370 Q356 390 358 410 Q360 428 354 440" fill="none" stroke="#E8A030" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  <ellipse cx="354" cy="446" rx="10" ry="13" fill="#E8A030" opacity="0.75"/>
+  <!-- Scattered honeycomb cells (decorative) -->
+  <path d="M180 180 L200 168 L220 180 L220 204 L200 216 L180 204Z" fill="none" stroke="#E8A54B" stroke-width="1.5" opacity="0.25"/>
+  <path d="M220 180 L240 168 L260 180 L260 204 L240 216 L220 204Z" fill="none" stroke="#E8A54B" stroke-width="1.5" opacity="0.2"/>
+  <path d="M580 380 L600 368 L620 380 L620 404 L600 416 L580 404Z" fill="none" stroke="#E8A54B" stroke-width="1.5" opacity="0.2"/>
+  <!-- Text label -->
+  <text x="400" y="558" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#E8A54B" letter-spacing="5" opacity="0.7">RAW CBD HONEY · AMBER HOUR</text>
+</svg>
