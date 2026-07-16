@@ -12,6 +12,9 @@
     "local:verify": "npm run verify:local-config && npm run quality:check"
   },
   "dependencies": {
+    "@netlify/database": "^1.1.0",
+    "@netlify/identity": "^1.2.0",
+    "drizzle-orm": "^1.0.0-beta.22",
     "framer-motion": "^12.42.2",
     "next": "16.2.10",
     "react": "19.2.4",
@@ -23,6 +26,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^1.0.0-beta.22",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "sharp": "^0.35.3",
