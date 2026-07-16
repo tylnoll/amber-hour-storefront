@@ -4,7 +4,7 @@ import { AdminProfile } from "@/lib/types";
 
 const SESSION_COOKIE = "amber_hour_admin";
 const DEFAULT_SECRET = "change-this-admin-secret";
-const DEFAULT_USERNAME = "bstoner";
+const DEFAULT_USERNAME = "bstoner@amberhourlab.com";
 const DEFAULT_PASSWORD = "stoner#1";
 
 function isProduction() {
